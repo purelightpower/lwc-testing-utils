@@ -1,5 +1,6 @@
 import { createElement } from "lwc";
 import HelloWorld from "c/helloWorld";
+import ShadowDomParser from "../src/ShadowDomParser";
 
 describe("ShadowDomParser tests", () => {
     let parser;
