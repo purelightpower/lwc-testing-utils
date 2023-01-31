@@ -1,0 +1,6 @@
+{
+    "preset": "@lwc/jest-preset",
+    "moduleNameMapper": {
+        "^(example|other)/(.+){{BODY}}": "<rootDir>/tests/lwc/$1/$2/$2"
+    }
+}
