@@ -7,7 +7,7 @@ describe("ShadowDomParser tests", () => {
 
     beforeEach(() => {
         let element = createElement("c-hello-world", {
-            is: HelloWorld
+            is: HelloWorld,
         });
         document.body.appendChild(element);
         parser = new ShadowDomParser(element);
@@ -37,5 +37,11 @@ describe("ShadowDomParser tests", () => {
 
         expect(child.tagName).toBe("UL");
         expect(child.parentNode.host.tagName).toBe("C-POST-LIST");
+    });
+
+    it("Find many children of a nested component", () => {
+        let children = parser.findAll(".posts > li");
+
+        expect(children).toHaveLength(3);
     });
 });
