@@ -25,4 +25,10 @@ describe("ShadowDomParser tests", () => {
 
         expect(child.textContent).toBe("Hello World!");
     });
+
+    it("Find many in immediate children", () => {
+        let children = parser.findAll(".updates > li");
+
+        expect(children).toHaveLength(3);
+    });
 });
