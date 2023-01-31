@@ -17,6 +17,9 @@ class ShadowDomParser {
         if (element) {
             return element;
         }
+        throw new Error(
+            `No element with a the ${selector} selector could be found in any of the component's immediate children.`
+        );
     }
 
     findAllInParent(selector) {
