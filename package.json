@@ -1,0 +1,22 @@
+{
+    "name": "@purelightpower/lwc-testing-utils",
+    "version": "0.0.1",
+    "description": "\"A library with helpful utilities for testing Salesforce lightning web components\"",
+    "main": "index.js",
+    "scripts": {
+        "test": "test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/purelightpower/lwc-testing-utils.git"
+    },
+    "author": {
+        "name": "Morgan Billingsley",
+        "email": "mbillingsley@purelightpower.com"
+    },
+    "license": "UNLICENSED",
+    "bugs": {
+        "url": "https://github.com/purelightpower/lwc-testing-utils/issues"
+    },
+    "homepage": "https://github.com/purelightpower/lwc-testing-utils#readme"
+}
