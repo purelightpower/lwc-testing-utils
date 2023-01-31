@@ -1,0 +1,11 @@
+<template>
+    <ul class="posts">
+        <template for:each={posts} for:item="post">
+            <li key={post.id}>
+                <a href={post.url}>
+                    {post.title}
+                </a>
+            </li>
+        </template>
+    </ul>
+</template>

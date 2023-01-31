@@ -31,4 +31,11 @@ describe("ShadowDomParser tests", () => {
 
         expect(children).toHaveLength(3);
     });
+
+    it("Find a child of a nested component", () => {
+        let child = parser.findOne(".posts");
+
+        expect(child.tagName).toBe("UL");
+        expect(child.parentElement.tagName).toBe("C-POST-LIST");
+    });
 });
