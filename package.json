@@ -21,6 +21,7 @@
     "homepage": "https://github.com/purelightpower/lwc-testing-utils#readme",
     "devDependencies": {
         "@lwc/jest-preset": "^11.7.0",
-        "jest": "^29.4.1"
+        "jest": "^29.4.1",
+        "lwc": "^2.37.0"
     }
 }
