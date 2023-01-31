@@ -36,6 +36,6 @@ describe("ShadowDomParser tests", () => {
         let child = parser.findOne(".posts");
 
         expect(child.tagName).toBe("UL");
-        expect(child.parentElement.tagName).toBe("C-POST-LIST");
+        expect(child.parentNode.host.tagName).toBe("C-POST-LIST");
     });
 });
