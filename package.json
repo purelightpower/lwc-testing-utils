@@ -18,5 +18,9 @@
     "bugs": {
         "url": "https://github.com/purelightpower/lwc-testing-utils/issues"
     },
-    "homepage": "https://github.com/purelightpower/lwc-testing-utils#readme"
+    "homepage": "https://github.com/purelightpower/lwc-testing-utils#readme",
+    "devDependencies": {
+        "@lwc/jest-preset": "^11.7.0",
+        "jest": "^29.4.1"
+    }
 }
