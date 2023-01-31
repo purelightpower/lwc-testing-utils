@@ -15,7 +15,8 @@ class ShadowDomParser {
 
     findAll(selector) {
         let fromParent = this.findAllInParent(selector);
-        return fromParent;
+        let fromNested = this.findAllInNested(selector);
+        return [...fromParent, ...fromNested];
     }
 
     findOneInImmediateChildren(selector) {
@@ -45,6 +46,16 @@ class ShadowDomParser {
     findAllInParent(selector) {
         let nodes = this.parent.shadowRoot.querySelectorAll(selector);
         return Array.from(nodes);
+    }
+
+    findAllInNested(selector) {
+        this.conditionallySetNestedComponents();
+        let elements = [];
+        for (let component of this.nestedComponents) {
+            let children = component.findAll(selector);
+            elements.push(...children);
+        }
+        return elements;
     }
 
     conditionallySetNestedComponents() {
