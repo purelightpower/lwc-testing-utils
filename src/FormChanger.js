@@ -21,6 +21,13 @@ class FormChanger {
         return FormChanger.triggerEvent(element, changeEvent);
     }
 
+    checkLightningCheckboxInput(label) {
+        let field = this.parser.findLightningInputByLabel(label);
+        field.checked = true;
+        let event = FormChanger.getCheckboxCheckedEvent();
+        return FormChanger.triggerEvent(field, event);
+    }
+
     static triggerEvent(element, event) {
         let promise = FormChanger.createListenerPromise(element, event.type);
         element.dispatchEvent(event);
@@ -42,6 +49,10 @@ class FormChanger {
             return new CustomEvent("change", { detail });
         }
         return new CustomEvent("change");
+    }
+
+    static getCheckboxCheckedEvent() {
+        return new CustomEvent("change", { detail: { checked: true } });
     }
 }
 
