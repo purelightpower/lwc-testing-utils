@@ -27,6 +27,13 @@ class FormChanger {
         return FormChanger.triggerEvent(element, changeEvent);
     }
 
+    changeLightningAddressInput(label, addressString) {
+        let field = this.parser.findLightningAddressInput(label);
+        let address = FormChanger.getAddressFromString(addressString);
+        let changeEvent = FormChanger.getChangeEvent(address);
+        return FormChanger.triggerEvent(field, changeEvent);
+    }
+
     checkLightningCheckboxInput(label) {
         let field = this.parser.findLightningInputByLabel(label);
         field.checked = true;
@@ -70,6 +77,18 @@ class FormChanger {
 
     static getCheckboxNotCheckedEvent() {
         return new CustomEvent("change", { detail: { checked: false } });
+    }
+
+    static getAddressFromString(addressString) {
+        let parts = addressString.split(", ");
+        let [province, postalCode] = parts[2].split(" ");
+        return {
+            street: parts[0],
+            city: parts[1],
+            province,
+            postalCode,
+            country: parts[3],
+        };
     }
 }
 

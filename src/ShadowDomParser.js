@@ -1,6 +1,7 @@
 const ALL_CHILDREN = "*";
 const LIGHTNING_INPUT = "lightning-input";
 const LIGHTNING_RADIO_GROUP = "lightning-radio-group";
+const LIGHTNING_ADDRESS_INPUT = "lightning-input-address";
 
 class ShadowDomParser {
     constructor(parent) {
@@ -28,6 +29,18 @@ class ShadowDomParser {
 
     findLightningRadioGroupByLabel(label) {
         return this.findByLabel(label, LIGHTNING_RADIO_GROUP);
+    }
+
+    findLightningAddressInput(label) {
+        let elements = this.findAll(LIGHTNING_ADDRESS_INPUT);
+        for (let element of elements) {
+            if (element.addressLabel && element.addressLabel === label) {
+                return element;
+            }
+        }
+        throw new Error(
+            `No ${LIGHTNING_ADDRESS_INPUT} element labeled ${label} was found in the dom.`
+        );
     }
 
     findByLabel(label, selector) {
