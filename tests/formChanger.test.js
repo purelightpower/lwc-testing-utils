@@ -2,6 +2,8 @@ import { createElement } from "lwc";
 import SignupForm from "c/signupForm";
 import FormChanger from "../src/FormChanger";
 
+const WHITE_HOUSE = "1600 Pennsylvania Ave NW, Washington, DC 20500, US";
+
 describe("FormChanger tests", () => {
     let changer;
 
@@ -59,5 +61,21 @@ describe("FormChanger tests", () => {
         return changer
             .changeLightningRadioGroup("Plan", "free")
             .then(() => radioGroupValueIs("Plan", "free"));
+    });
+
+    let addressValueIs = (label, addressString) => {
+        let inputElement = changer.parser.findLightningAddressInput(label);
+        let address = FormChanger.getAddressFromString(addressString);
+        expect(inputElement.street).toBe(address.street);
+        expect(inputElement.city).toBe(address.city);
+        expect(inputElement.province).toBe(address.province);
+        expect(inputElement.postalCode).toBe(address.postalCode);
+        expect(inputElement.country).toBe(address.country);
+    }
+
+    it("Set address input", () => {
+        return changer
+            .changeLightningAddressInput("Home Address", WHITE_HOUSE)
+            .then(() => addressValueIs("Home Address", WHITE_HOUSE));
     });
 });
