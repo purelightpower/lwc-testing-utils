@@ -27,6 +27,16 @@ class FormChanger {
         return promise;
     }
 
+    static createListenerPromise(element, event) {
+        return new Promise((resolve) => {
+            let callback = () => {
+                element.removeEventListener(event, callback);
+                resolve();
+            };
+            element.addEventListener(event, callback);
+        });
+    }
+
     static getChangeEvent(detail = null) {
         if (detail) {
             return new CustomEvent("change", { detail });
