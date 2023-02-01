@@ -1,4 +1,5 @@
 const ALL_CHILDREN = "*";
+const LIGHTNING_INPUT = "lightning-input";
 class ShadowDomParser {
     constructor(parent) {
         this.parent = parent;
@@ -17,6 +18,22 @@ class ShadowDomParser {
         let fromParent = this.findAllInParent(selector);
         let fromNested = this.findAllInNested(selector);
         return [...fromParent, ...fromNested];
+    }
+
+    findLightningInputByLabel(label) {
+        return this.findByLabel(label, LIGHTNING_INPUT);
+    }
+
+    findByLabel(label, selector) {
+        let elements = this.findAll(selector);
+        for (let element of elements) {
+            if (element.label === label) {
+                return element;
+            }
+        }
+        throw new Error(
+            `No ${selector} element labeled ${label} was found in the dom.`
+        );
     }
 
     findOneInImmediateChildren(selector) {
