@@ -36,9 +36,16 @@ describe("FormChanger tests", () => {
         expect(inputElement.checked).toBeTruthy();
     }
 
-    it("Check a checkbox", () => {
+    let checkboxIsUnchecked = (label) => {
+        let inputElement = changer.parser.findLightningInputByLabel(label);
+        expect(inputElement.checked).toBeFalsy();
+    }
+
+    it("Check and uncheck a checkbox", () => {
         return changer
             .checkLightningCheckboxInput("Send me mail")
-            .then(() => checkboxIsChecked("Send me mail"));
+            .then(() => checkboxIsChecked("Send me mail"))
+            .then(() => changer.uncheckLightningCheckboxInput("Send me mail"))
+            .then(() => checkboxIsUnchecked("Send me mail"));
     });
 });
