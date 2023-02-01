@@ -30,4 +30,15 @@ describe("FormChanger tests", () => {
             .changeLightningInput("First Name", "John")
             .then(() => inputValueEquals("First Name", "John"));
     });
+
+    let checkboxIsChecked = (label) => {
+        let inputElement = changer.parser.findLightningInputByLabel(label);
+        expect(inputElement.checked).toBeTruthy();
+    }
+
+    it("Check a checkbox", () => {
+        return changer
+            .checkLightningCheckboxInput("Send me mail")
+            .then(() => checkboxIsChecked("Send me mail"));
+    });
 });
