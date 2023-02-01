@@ -7,18 +7,51 @@
             <lightning-input type="text" label="Last Name" name="last"></lightning-input>
         </div>
         <div class="slds-form-element slds-form-element_stacked">
+            <lightning-input-address
+                address-label="Home Address"
+                street-label="Street"
+                street={home.street}
+                city-label="City"
+                city={home.city}
+                province-label="Province"
+                province={home.province}
+                postal-code-label="PostalCode"
+                postal-code={home.postalCode}
+                country-label="Country"
+                country={home.country}
+                onchange={handleHomeChange}
+            ></lightning-input-address>
+        </div>
+        <div class="slds-form-element slds-form-element_stacked">
             <lightning-input type="checkbox" label="Send me mail" name="mail"
                 onchange={handleMailChange}></lightning-input>
         </div>
-        <template if:true={sendMail}>
-            <div class="slds-form-element slds-form-element_stacked">
-                <lightning-input-address address-label="Address" street-label="Street" city-label="City"
-                    country-label="Country" province-label="Province"
-                    postal-code-label="PostalCode"></lightning-input-address>
-            </div>
-        </template>
         <div class="slds-form-element slds-form-element_stacked">
             <lightning-radio-group name="plan" label="Plan" options={plans} type="radio" onchange={handlePlanChange} value={plan}></lightning-radio-group>
         </div>
+        <template if:true={isPaid}>
+            <div class="slds-form-element slds-form-element_stacked">
+                <lightning-input type="checkbox" label="Billing address is same as home address" name="billing-address-is-same"
+                    checked={billingAddressIsSame} onchange={handleBillingAddressIsSameChange}></lightning-input>
+            </div>
+            <template if:false={billingAddressIsSame}>
+                <div class="slds-form-element slds-form-element_stacked">
+                    <lightning-input-address
+                        address-label="Billing Address"
+                        street-label="Street"
+                        street={billing.street}
+                        city-label="City"
+                        city={billing.city}
+                        province-label="Province"
+                        province={billing.province}
+                        postal-code-label="PostalCode"
+                        postal-code={billing.postalCode}
+                        country-label="Country"
+                        country={billing.country}
+                        onchange={handleBillingChange}
+                    ></lightning-input-address>
+                </div>
+            </template>
+        </template>
     </div>
 </template>
