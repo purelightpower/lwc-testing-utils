@@ -34,12 +34,12 @@ describe("FormChanger tests", () => {
     let checkboxIsChecked = (label) => {
         let inputElement = changer.parser.findLightningInputByLabel(label);
         expect(inputElement.checked).toBeTruthy();
-    }
+    };
 
     let checkboxIsUnchecked = (label) => {
         let inputElement = changer.parser.findLightningInputByLabel(label);
         expect(inputElement.checked).toBeFalsy();
-    }
+    };
 
     it("Check and uncheck a checkbox", () => {
         return changer
@@ -47,5 +47,17 @@ describe("FormChanger tests", () => {
             .then(() => checkboxIsChecked("Send me mail"))
             .then(() => changer.uncheckLightningCheckboxInput("Send me mail"))
             .then(() => checkboxIsUnchecked("Send me mail"));
+    });
+
+    let radioGroupValueIs = (label, value) => {
+        let radioGroupElement =
+            changer.parser.findLightningRadioGroupByLabel(label);
+        expect(radioGroupElement.value).toBe(value);
+    };
+
+    it("Change a radio group input", () => {
+        return changer
+            .changeLightningRadioGroup("Plan", "free")
+            .then(() => radioGroupValueIs("Plan", "free"));
     });
 });
