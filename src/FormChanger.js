@@ -10,6 +10,12 @@ class FormChanger {
         return new FormChanger(parser);
     }
 
+    static fromParentTemplate(parent) {
+        let parser = new ShadowDomParser(parent);
+        let formElement = parser.findFormElement();
+        return FormChanger.fromElement(formElement);
+    }
+
     changeLightningInput(label, value) {
         let field = this.parser.findLightningInputByLabel(label);
         return this.changeElementValue(field, value);

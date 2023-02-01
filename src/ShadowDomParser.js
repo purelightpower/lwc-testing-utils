@@ -2,6 +2,7 @@ const ALL_CHILDREN = "*";
 const LIGHTNING_INPUT = "lightning-input";
 const LIGHTNING_RADIO_GROUP = "lightning-radio-group";
 const LIGHTNING_ADDRESS_INPUT = "lightning-input-address";
+const SLDS_FORM = ".slds-form";
 
 class ShadowDomParser {
     constructor(parent) {
@@ -55,6 +56,15 @@ class ShadowDomParser {
         );
     }
 
+    hasInImmediateChildren(selector) {
+        try {
+            this.findOneInImmediateChildren(selector);
+            return true;
+        } catch (_) {
+            return false;
+        }
+    }
+
     findOneInImmediateChildren(selector) {
         let element = this.parent.shadowRoot.querySelector(selector);
         if (element) {
@@ -94,6 +104,49 @@ class ShadowDomParser {
         return elements;
     }
 
+    isFormElement() {
+        return this.hasInImmediateChildren(SLDS_FORM);
+    }
+
+    findFormElement() {
+        this.conditionallySetNestedComponents();
+        for (let component of this.nestedComponents) {
+            if (component.isFormElement()) {
+                return component.parent;
+            }
+            try {
+                return component.findFormElement();
+            } catch (_) {
+                /** */
+            }
+        }
+        throw new Error("There are no form elements");
+    }
+
+    findFormElementInImmediateChildren() {
+        let children = this.getChildren();
+        for (let child of children) {
+            if (ShadowDomParser.isFormComponent(child)) {
+                return child;
+            }
+        }
+        throw new Error(
+            "None of the immediate children of this element are form components."
+        );
+    }
+
+    findFormElementInNestedChildren() {
+        this.conditionallySetNestedComponents();
+        for (let component of this.nestedComponents) {
+            try {
+                return component.findFormElement();
+            } catch (_) {
+                /** */
+            }
+        }
+        throw new Error("No form elements were found.");
+    }
+
     conditionallySetNestedComponents() {
         if (this.nestedComponents.length < 1) {
             this.setNestedComponents();
@@ -124,6 +177,13 @@ class ShadowDomParser {
         return lowerCaseTagName.startsWith("c-");
     }
 
+    static isFormComponent(element) {
+        let lowerCaseTagName = element.tagName.toLowerCase();
+        return (
+            lowerCaseTagName.startsWith("c-") &&
+            lowerCaseTagName.endsWith("-form")
+        );
+    }
 }
 
 export default ShadowDomParser;
