@@ -1,10 +1,11 @@
 import { createElement } from "lwc";
 import SignupForm from "c/signupForm";
+import SignupCard from "c/signupCard";
 import FormChanger from "../src/FormChanger";
 
 const WHITE_HOUSE = "1600 Pennsylvania Ave NW, Washington, DC 20500, US";
 
-describe("FormChanger tests", () => {
+describe("FormChanger standard tests", () => {
     let changer;
 
     beforeEach(() => {
@@ -77,5 +78,30 @@ describe("FormChanger tests", () => {
         return changer
             .changeLightningAddressInput("Home Address", WHITE_HOUSE)
             .then(() => addressValueIs("Home Address", WHITE_HOUSE));
+    });
+});
+
+describe("FormChanger nested form tests", () => {
+    let parent;
+
+    beforeEach(() => {
+        parent = createElement("c-signup-card", {
+            is: SignupCard,
+        });
+        document.body.appendChild(parent);
+    });
+
+    afterEach(() => {
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
+        parent = null;
+    });
+
+    it("Can find nested form", () => {
+        let changer = FormChanger.fromParentTemplate(parent);
+
+        expect(changer.parser.parent.tagName.toLowerCase()).toBe("c-signup-form");
+        expect(changer.parser.parent.parentNode.parentNode.host.tagName.toLowerCase()).toBe("c-signup-card");
     });
 });
