@@ -15,6 +15,12 @@ class FormChanger {
         return this.changeElementValue(field, value);
     }
 
+    changeLightningRadioGroup(label, value) {
+        let field = this.parser.findLightningRadioGroupByLabel(label);
+        let changeEvent = FormChanger.getChangeEvent({ value });
+        return FormChanger.triggerEvent(field, changeEvent);
+    }
+
     changeElementValue(element, value) {
         element.value = value;
         let changeEvent = FormChanger.getChangeEvent();

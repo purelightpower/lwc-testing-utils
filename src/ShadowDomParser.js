@@ -1,5 +1,7 @@
 const ALL_CHILDREN = "*";
 const LIGHTNING_INPUT = "lightning-input";
+const LIGHTNING_RADIO_GROUP = "lightning-radio-group";
+
 class ShadowDomParser {
     constructor(parent) {
         this.parent = parent;
@@ -22,6 +24,10 @@ class ShadowDomParser {
 
     findLightningInputByLabel(label) {
         return this.findByLabel(label, LIGHTNING_INPUT);
+    }
+
+    findLightningRadioGroupByLabel(label) {
+        return this.findByLabel(label, LIGHTNING_RADIO_GROUP);
     }
 
     findByLabel(label, selector) {
