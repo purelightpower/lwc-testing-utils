@@ -1,0 +1,24 @@
+<template>
+    <div class="slds-form">
+        <div class="slds-form-element slds-form-element_stacked">
+            <lightning-input type="text" label="First Name" name="first"></lightning-input>
+        </div>
+        <div class="slds-form-element slds-form-element_stacked">
+            <lightning-input type="text" label="Last Name" name="last"></lightning-input>
+        </div>
+        <div class="slds-form-element slds-form-element_stacked">
+            <lightning-input type="checkbox" label="Send me mail" name="mail"
+                onchange={handleMailChange}></lightning-input>
+        </div>
+        <template if:true={sendMail}>
+            <div class="slds-form-element slds-form-element_stacked">
+                <lightning-input-address address-label="Address" street-label="Street" city-label="City"
+                    country-label="Country" province-label="Province"
+                    postal-code-label="PostalCode"></lightning-input-address>
+            </div>
+        </template>
+        <div class="slds-form-element slds-form-element_stacked">
+            <lightning-radio-group name="plan" label="Plan" options={plans} type="radio" onchange={handlePlanChange}></lightning-radio-group>
+        </div>
+    </div>
+</template>
