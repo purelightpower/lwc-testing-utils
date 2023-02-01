@@ -1,9 +1,10 @@
 {
     "preset": "@lwc/jest-preset",
     "moduleNameMapper": {
-        "^c/(.+)$": "<rootDir>/tests/lwc/$1/$1"
+        "^c/(.+)$": "<rootDir>/tests/lwc/$1/$1",
+        "^lightning/(.*)": "<rootDir>/node_modules/lightning-base-components/src/lightning/$1/$1.js",
+        "^@salesforce/internal/(.+)": "<rootDir>/config/null.js"
     },
-    "testMatch": [
-        "**/tests/**/*.test.js"
-    ]
+    "testMatch": ["**/tests/**/*.test.js"],
+    "transformIgnorePatterns": ["/node_modules/(?!lightning-base-components)"]
 }

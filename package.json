@@ -21,8 +21,10 @@
     "homepage": "https://github.com/purelightpower/lwc-testing-utils#readme",
     "devDependencies": {
         "@lwc/jest-preset": "^11.7.0",
+        "@salesforce-ux/design-system": "^2.20.1",
         "jest": "^29.4.1",
         "jest-environment-jsdom": "^29.4.1",
+        "lightning-base-components": "^1.11.5-alpha",
         "lwc": "^2.37.0"
     }
 }
