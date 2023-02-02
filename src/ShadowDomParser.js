@@ -24,6 +24,15 @@ class ShadowDomParser {
         return [...fromParent, ...fromNested];
     }
 
+    hasLightningInput(label) {
+        try {
+            this.findLightningInputByLabel(label);
+            return true;
+        } catch (_) {
+            return false;
+        }
+    }
+
     findLightningInputByLabel(label) {
         return this.findByLabel(label, LIGHTNING_INPUT);
     }
