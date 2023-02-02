@@ -79,6 +79,14 @@ describe("FormChanger standard tests", () => {
             .changeLightningAddressInput("Home Address", WHITE_HOUSE)
             .then(() => addressValueIs("Home Address", WHITE_HOUSE));
     });
+
+    it("Wait for element to appear after change", () => {
+        return changer
+            .getLightningRadioGroup("Plan")
+            .waitForLightningInputToAppearAfterChange("Billing address is same as home address")
+            .changeTo("premium")
+            .then(() => thenInputAppeared("Billing address is same as home address"));
+    });
 });
 
 describe("FormChanger nested form tests", () => {
