@@ -26,5 +26,8 @@
         "jest-environment-jsdom": "^29.4.1",
         "lightning-base-components": "^1.11.5-alpha",
         "lwc": "^2.37.0"
+    },
+    "dependencies": {
+        "events": "^3.3.0"
     }
 }
