@@ -2,6 +2,7 @@ import { createElement } from "lwc";
 import SignupForm from "c/signupForm";
 import SignupCard from "c/signupCard";
 import FormChanger from "../src/FormChanger";
+import AddressParser from "../src/utils/AddressParser";
 
 const WHITE_HOUSE = "1600 Pennsylvania Ave NW, Washington, DC 20500, US";
 
@@ -66,7 +67,7 @@ describe("FormChanger standard tests", () => {
 
     let addressValueIs = (label, addressString) => {
         let inputElement = changer.parser.findLightningAddressInput(label);
-        let address = FormChanger.getAddressFromString(addressString);
+        let address = AddressParser.parse(addressString);
         expect(inputElement.street).toBe(address.street);
         expect(inputElement.city).toBe(address.city);
         expect(inputElement.province).toBe(address.province);
