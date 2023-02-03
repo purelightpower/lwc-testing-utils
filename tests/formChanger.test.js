@@ -82,9 +82,10 @@ describe("FormChanger standard tests", () => {
 
     it("Wait for element to appear after change", () => {
         return changer
-            .getLightningRadioGroup("Plan")
+            .getLightningRadioGroupField("Plan")
+            .makeChange()
             .waitForLightningInputToAppearAfterChange("Billing address is same as home address")
-            .changeTo("premium")
+            .change("premium")
             .then(() => thenInputAppeared("Billing address is same as home address"));
     });
 });
