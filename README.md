@@ -42,7 +42,7 @@ The `ShadowDomParser` allows us to parse the lwc shadow dom for certain elements
 // parser.example.js
 import { createElement } from "lwc";
 import Hello from "c/hello";
-import { ShadowDomParser } from "@purelightpower/lwc-testing-util";
+import { ShadowDomParser } from "@purelightpower/lwc-testing-utils";
 
 let element = createElement("c-hello", {
     is: Hello
@@ -102,7 +102,7 @@ The form changer class allows us to change the fields in a custom lwc form.
 // changer.example.js
 import { createElement } from "lwc";
 import Form from "c/form";
-import { FormChanger } from "@purelightpower/lwc-testing-util";
+import { FormChanger } from "@purelightpower/lwc-testing-utils";
 
 let element = createElement("c-form", {
     is: Form
