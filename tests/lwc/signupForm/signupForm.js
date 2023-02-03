@@ -22,25 +22,35 @@ export default class SignupForm extends LightningElement {
 
     handleHomeChange(event) {
         this.home = event.detail;
+        this.triggerChange();
     }
 
     handleMailChange(event) {
         this.sendMail = event.detail.checked;
+        this.triggerChange();
     }
 
     handlePlanChange(event) {
         this.plan = event.detail.value;
+        this.triggerChange();
     }
 
     handleBillingAddressIsSameChange(event) {
         this.billingAddressIsSame = event.detail.checked;
+        this.triggerChange();
     }
 
     handleBillingChange(event) {
         this.billing = event.detail;
+        this.triggerChange();
     }
 
     get isPaid() {
         return this.plan === "premium";
+    }
+
+    triggerChange() {
+        let event = new CustomEvent("change");
+        this.dispatchEvent(event);
     }
 }
