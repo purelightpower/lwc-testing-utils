@@ -1,4 +1,5 @@
 import LightningAddressInput from "./fields/LightningAddressInput";
+import LightningCheckboxInput from "./fields/LightningCheckboxInput";
 import LightningInput from "./fields/LightningInput";
 import LightningRadioGroup from "./fields/LightningRadioGroup";
 import ShadowDomParser from "./ShadowDomParser";
@@ -56,17 +57,18 @@ class FormChanger {
     }
 
     checkLightningCheckboxInput(label) {
-        let field = this.parser.findLightningInputByLabel(label);
-        field.checked = true;
-        let event = FormChanger.getCheckboxCheckedEvent();
-        return FormChanger.triggerEvent(field, event);
+        let field = this.getLightningCheckboxInputField(label);
+        return field.check();
     }
 
     uncheckLightningCheckboxInput(label) {
-        let field = this.parser.findLightningInputByLabel(label);
-        field.checked = false;
-        let event = FormChanger.getCheckboxNotCheckedEvent();
-        return FormChanger.triggerEvent(field, event);
+        let field = this.getLightningCheckboxInputField(label);
+        return field.uncheck();
+    }
+
+    getLightningCheckboxInputField(label) {
+        let element = this.parser.findLightningInputByLabel(label);
+        return new LightningCheckboxInput(element);
     }
 
     static triggerEvent(element, event) {
