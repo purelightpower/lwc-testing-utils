@@ -26,6 +26,10 @@ class LightningFieldChange {
         }
         return new CustomEvent(this.EVENT_NAME);
     }
+
+    waitForAfterChange(waiter) {
+        this.waiter = waiter;
+    }
 }
 
 export default LightningFieldChange;
