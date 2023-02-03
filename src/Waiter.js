@@ -9,7 +9,7 @@ class Waiter {
         this.emitter = new EventEmitter();
         this.element = element;
         this.#resolve = Promise.resolve;
-        this.#listenerCallback = this.#handleChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     listenOnce(resolve) {
@@ -19,14 +19,14 @@ class Waiter {
 
     start(resolve) {
         this.#resolve = resolve;
-        this.element.addEventListener(CHANGE_EVENT, this.#listenerCallback);
+        this.element.addEventListener(CHANGE_EVENT, this.handleChange);
     }
 
     stop() {
-        this.element.removeEventListener(CHANGE_EVENT, this.#listenerCallback);
+        this.element.removeEventListener(CHANGE_EVENT, this.handleChange);
     }
     
-    #handleChange(event) {
+    handleChange(event) {
         if (this.isDoneWaiting(event)) {
             this.emitter.emit("change", event);
             this.#resolve();
