@@ -1,4 +1,4 @@
-import FormLightningInputChange from "./FormLightningInputChange";
+import LightningInput from "./fields/LightningInput";
 import ShadowDomParser from "./ShadowDomParser";
 
 class FormChanger {
@@ -24,7 +24,7 @@ class FormChanger {
 
     getLightningInput(label) {
         let element = this.parser.findLightningInputByLabel(label);
-        return new FormLightningInputChange(this.parser, element);
+        return new LightningInput(element);
     }
 
     changeLightningRadioGroup(label, value) {
