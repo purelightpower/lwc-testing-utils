@@ -3,6 +3,7 @@ import SignupForm from "c/signupForm";
 import SignupCard from "c/signupCard";
 import FormChanger from "../src/FormChanger";
 import AddressParser from "../src/utils/AddressParser";
+import LightningInputWaiter from "../src/waiters/LightningInputWaiter";
 
 const WHITE_HOUSE = "1600 Pennsylvania Ave NW, Washington, DC 20500, US";
 
@@ -82,10 +83,11 @@ describe("FormChanger standard tests", () => {
     });
 
     it("Wait for element to appear after change", () => {
+        let waiter = LightningInputWaiter.fromFormParser(changer.parser, "Billing address is same as home address");
         return changer
             .getLightningRadioGroupField("Plan")
             .makeChange()
-            .waitForLightningInputToAppearAfterChange("Billing address is same as home address")
+            .waitForAfterChange(waiter)
             .change("premium")
             .then(() => thenInputAppeared("Billing address is same as home address"));
     });
