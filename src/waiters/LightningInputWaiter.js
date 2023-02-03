@@ -1,10 +1,14 @@
 import Waiter from "../Waiter";
 
 class LightningInputWaiter extends Waiter {
-    constructor(formParser, label) {
-        super(formParser.parent);
-        this.parser = formParser;
-        this.label = label;
+    constructor(parser, formElement, inputLabel) {
+        super(formElement);
+        this.parser = parser;
+        this.label = inputLabel;
+    }
+
+    fromFormParser(parser, inputLabel) {
+        return new LightningInputWaiter(parser, parser.parent, inputLabel);
     }
 
     isDoneWaiting() {
