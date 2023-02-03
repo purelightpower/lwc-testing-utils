@@ -1,4 +1,5 @@
 import LightningInput from "./fields/LightningInput";
+import LightningRadioGroup from "./fields/LightningRadioGroup";
 import ShadowDomParser from "./ShadowDomParser";
 
 class FormChanger {
@@ -28,9 +29,13 @@ class FormChanger {
     }
 
     changeLightningRadioGroup(label, value) {
-        let field = this.parser.findLightningRadioGroupByLabel(label);
-        let changeEvent = FormChanger.getChangeEvent({ value });
-        return FormChanger.triggerEvent(field, changeEvent);
+        let field = this.getLightningRadioGroupField(label);
+        return field.changeTo(value);
+    }
+
+    getLightningRadioGroupField(label) {
+        let element = this.parser.findLightningRadioGroupByLabel(label);
+        return new LightningRadioGroup(element);
     }
 
     changeElementValue(element, value) {
