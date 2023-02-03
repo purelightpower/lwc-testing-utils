@@ -29,6 +29,7 @@ class LightningFieldChange {
 
     waitForAfterChange(waiter) {
         this.waiter = waiter;
+        return this;
     }
 }
 
