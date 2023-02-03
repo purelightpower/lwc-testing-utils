@@ -27,10 +27,12 @@ class Waiter {
     }
     
     handleChange(event) {
-        if (this.isDoneWaiting(event)) {
-            this.emitter.emit("change", event);
-            this.#resolve();
-        }
+        setTimeout(() => {
+            if (this.isDoneWaiting(event)) {
+                this.emitter.emit("change", event);
+                this.#resolve();
+            }
+        }, 0);
     }
 
     isDoneWaiting() {
