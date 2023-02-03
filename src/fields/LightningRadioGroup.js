@@ -1,8 +1,9 @@
+import LightningRadioGroupChange from "../changes/LightningRadioGroupChange";
 import LightningField from "../LightningField";
 
 class LightningRadioGroup extends LightningField {
     makeChange() {
-        return new LightningRadioGroup(this.element);
+        return new LightningRadioGroupChange(this.element);
     }
 }
 
