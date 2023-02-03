@@ -18,13 +18,13 @@ class FormChanger {
     }
 
     changeLightningInput(label, value) {
-        let change = this.getLightningInput(label);
-        return change.changeTo(value);
+        let field = this.getLightningInput(label);
+        return field.changeTo(value);
     }
 
     getLightningInput(label) {
-        let field = this.parser.findLightningInputByLabel(label);
-        return new FormLightningInputChange(this.parser, field);
+        let element = this.parser.findLightningInputByLabel(label);
+        return new FormLightningInputChange(this.parser, element);
     }
 
     changeLightningRadioGroup(label, value) {
