@@ -82,6 +82,12 @@ describe("FormChanger standard tests", () => {
             .then(() => addressValueIs("Home Address", WHITE_HOUSE));
     });
 
+    let thenInputAppeared = (label) => {
+        let field = changer.getLightningInputField(label);
+        expect(field.element.tagName.toLowerCase()).toBe("lightning-input");
+        expect(field.element.label).toBe(label);
+    }
+
     it("Wait for element to appear after change", () => {
         let waiter = LightningInputWaiter.fromFormParser(changer.parser, "Billing address is same as home address");
         return changer
