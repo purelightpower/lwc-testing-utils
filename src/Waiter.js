@@ -1,6 +1,8 @@
 import EventEmitter from "events";
 
 class Waiter {
+    #resolve;
+
     constructor(element) {
         this.emitter = new EventEmitter();
         this.element = element;
