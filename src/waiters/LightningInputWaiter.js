@@ -7,7 +7,7 @@ class LightningInputWaiter extends Waiter {
         this.label = inputLabel;
     }
 
-    fromFormParser(parser, inputLabel) {
+    static fromFormParser(parser, inputLabel) {
         return new LightningInputWaiter(parser, parser.parent, inputLabel);
     }
 
