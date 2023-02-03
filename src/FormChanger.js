@@ -18,11 +18,11 @@ class FormChanger {
     }
 
     changeLightningInput(label, value) {
-        let field = this.getLightningInput(label);
+        let field = this.getLightningInputField(label);
         return field.changeTo(value);
     }
 
-    getLightningInput(label) {
+    getLightningInputField(label) {
         let element = this.parser.findLightningInputByLabel(label);
         return new LightningInput(element);
     }
