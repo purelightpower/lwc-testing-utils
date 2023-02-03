@@ -70,49 +70,6 @@ class FormChanger {
         let element = this.parser.findLightningInputByLabel(label);
         return new LightningCheckboxInput(element);
     }
-
-    static triggerEvent(element, event) {
-        let promise = FormChanger.createListenerPromise(element, event.type);
-        element.dispatchEvent(event);
-        return promise;
-    }
-
-    static createListenerPromise(element, event) {
-        return new Promise((resolve) => {
-            let callback = () => {
-                element.removeEventListener(event, callback);
-                resolve();
-            };
-            element.addEventListener(event, callback);
-        });
-    }
-
-    static getChangeEvent(detail = null) {
-        if (detail) {
-            return new CustomEvent("change", { detail });
-        }
-        return new CustomEvent("change");
-    }
-
-    static getCheckboxCheckedEvent() {
-        return new CustomEvent("change", { detail: { checked: true } });
-    }
-
-    static getCheckboxNotCheckedEvent() {
-        return new CustomEvent("change", { detail: { checked: false } });
-    }
-
-    static getAddressFromString(addressString) {
-        let parts = addressString.split(", ");
-        let [province, postalCode] = parts[2].split(" ");
-        return {
-            street: parts[0],
-            city: parts[1],
-            province,
-            postalCode,
-            country: parts[3],
-        };
-    }
 }
 
 export default FormChanger;
