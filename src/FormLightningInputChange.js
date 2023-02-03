@@ -1,4 +1,5 @@
 import Waiter from "./Waiter";
+import LightningInputWaiter from "./waiters/LightningInputWaiter";
 
 const CHANGE_EVENT = "change";
 
