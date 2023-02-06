@@ -4,6 +4,8 @@ import SignupCard from "c/signupCard";
 import FormChanger from "../src/FormChanger";
 import AddressParser from "../src/utils/AddressParser";
 import LightningInputWaiter from "../src/waiters/LightningInputWaiter";
+import LightningAddressInputWaiter from "../src/waiters/LightningAddressInputWaiter";
+import LightningCheckboxChange from "../src/changes/LightningCheckboxInputChange";
 
 const WHITE_HOUSE = "1600 Pennsylvania Ave NW, Washington, DC 20500, US";
 
@@ -82,6 +84,15 @@ describe("FormChanger standard tests", () => {
             .then(() => addressValueIs("Home Address", WHITE_HOUSE));
     });
 
+    let whenPremiumPlanIsSelected = () => {
+        let waiter = LightningInputWaiter.fromFormParser(changer.parser, "Billing address is same as home address");
+        return changer
+            .getLightningRadioGroupField("Plan")
+            .makeChange()
+            .waitForAfterChange(waiter)
+            .change("premium");
+    };
+
     let thenInputAppeared = (label) => {
         let field = changer.getLightningInputField(label);
         expect(field.element.tagName.toLowerCase()).toBe("lightning-input");
@@ -89,13 +100,29 @@ describe("FormChanger standard tests", () => {
     }
 
     it("Wait for element to appear after change", () => {
-        let waiter = LightningInputWaiter.fromFormParser(changer.parser, "Billing address is same as home address");
+        return whenPremiumPlanIsSelected()
+            .then(() => thenInputAppeared("Billing address is same as home address"));
+    });
+
+    let whenBillingAddressIsDifferent = () => {
+        let waiter = LightningAddressInputWaiter.fromFormParser(changer.parser, "Billing Address");
         return changer
-            .getLightningRadioGroupField("Plan")
+            .getLightningCheckboxInputField("Billing address is same as home address")
             .makeChange()
             .waitForAfterChange(waiter)
-            .change("premium")
-            .then(() => thenInputAppeared("Billing address is same as home address"));
+            .change(LightningCheckboxChange.UNCHECK);
+    }
+
+    let thenAddressInputAppeared = (label) => {
+        let field = changer.getAddressInputField(label);
+        expect(field.element.tagName.toLowerCase()).toBe("lightning-input-address");
+        expect(field.element.addressLabel).toBe(label);
+    }
+
+    it("Wait for address input to appear after change", () => {
+        return whenPremiumPlanIsSelected()
+            .then(() => whenBillingAddressIsDifferent())
+            .then(() => thenAddressInputAppeared("Billing Address"));
     });
 });
 
