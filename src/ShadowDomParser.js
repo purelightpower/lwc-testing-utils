@@ -41,6 +41,15 @@ class ShadowDomParser {
         return this.findByLabel(label, LIGHTNING_RADIO_GROUP);
     }
 
+    hasLightningAddressInput(label) {
+        try {
+            this.findLightningAddressInput(label);
+            return true;
+        } catch (_) {
+            return false;
+        }
+    }
+
     findLightningAddressInput(label) {
         let elements = this.findAll(LIGHTNING_ADDRESS_INPUT);
         for (let element of elements) {
