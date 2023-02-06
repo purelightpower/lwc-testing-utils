@@ -4,6 +4,14 @@ class LightningCheckboxChange extends LightningFieldChange {
     static CHECK = "check";
     static UNCHECK = "uncheck";
 
+    check() {
+        return this.change(LightningCheckboxChange.CHECK);
+    }
+
+    uncheck() {
+        return this.change(LightningCheckboxChange.UNCHECK);
+    }
+
     setValue(value) {
         if (LightningCheckboxChange.valueIsCheck(value)) {
             this.setAsChecked();
