@@ -2,6 +2,7 @@ const ALL_CHILDREN = "*";
 const LIGHTNING_INPUT = "lightning-input";
 const LIGHTNING_RADIO_GROUP = "lightning-radio-group";
 const LIGHTNING_ADDRESS_INPUT = "lightning-input-address";
+const LIGHTNING_COMBOBOX = "lightning-combobox";
 const SLDS_FORM = ".slds-form";
 
 class ShadowDomParser {
@@ -60,6 +61,10 @@ class ShadowDomParser {
         throw new Error(
             `No ${LIGHTNING_ADDRESS_INPUT} element labeled ${label} was found in the dom.`
         );
+    }
+
+    findLightningCombobox(label) {
+        return this.findByLabel(label, LIGHTNING_COMBOBOX);
     }
 
     findByLabel(label, selector) {
