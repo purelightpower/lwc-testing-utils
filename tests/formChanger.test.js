@@ -93,6 +93,11 @@ describe("FormChanger standard tests", () => {
             .change("premium");
     };
 
+    let comboboxValueEquals = (label, value) => {
+        let element = changer.parser.findLightningCombobox(label);
+        expect(element.value).toBe(value);
+    }
+
     it("Set combobox value", () => {
         return changer
             .changeLightningCombobox("Gender", "male")
