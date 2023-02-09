@@ -93,6 +93,12 @@ describe("FormChanger standard tests", () => {
             .change("premium");
     };
 
+    it("Set combobox value", () => {
+        return changer
+            .changeLightningCombobox("Gender", "male")
+            .then(() => comboboxValueEquals("Gender", "male"));
+    });
+
     let thenInputAppeared = (label) => {
         let field = changer.getLightningInputField(label);
         expect(field.element.tagName.toLowerCase()).toBe("lightning-input");

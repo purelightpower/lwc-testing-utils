@@ -9,7 +9,10 @@ export default class SignupForm extends LightningElement {
         country: "",
     };
     sendMail = false;
-    plans = [{ label: "Free", value: "free" }, { label: "Premium", value: "premium" }];
+    plans = [
+        { label: "Free", value: "free" },
+        { label: "Premium", value: "premium" },
+    ];
     plan = "";
     billingAddressIsSame = true;
     billing = {
@@ -19,6 +22,21 @@ export default class SignupForm extends LightningElement {
         postalCode: "",
         country: "",
     };
+    genders = [
+        {
+            label: "Male",
+            value: "male",
+        },
+        {
+            label: "Female",
+            value: "female",
+        },
+        {
+            label: "Prefer not to say",
+            value: "private",
+        },
+    ];
+    gender = "";
 
     handleHomeChange(event) {
         this.home = event.detail;
@@ -42,6 +60,11 @@ export default class SignupForm extends LightningElement {
 
     handleBillingChange(event) {
         this.billing = event.detail;
+        this.triggerChange();
+    }
+
+    handleGenderChange(event) {
+        this.gender = event.detail.value;
         this.triggerChange();
     }
 

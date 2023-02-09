@@ -1,6 +1,14 @@
 <template>
     <div class="slds-form">
         <div class="slds-form-element slds-form-element_stacked">
+            <lightning-combobox
+                label="Gender"
+                options={genders}
+                value={gender}
+                onchange={handleGenderChange}
+            ></lightning-combobox>
+        </div>
+        <div class="slds-form-element slds-form-element_stacked">
             <lightning-input type="text" label="First Name" name="first"></lightning-input>
         </div>
         <div class="slds-form-element slds-form-element_stacked">
