@@ -1,7 +1,7 @@
 import LightningAddressInput from "./fields/LightningAddressInput";
 import LightningCheckboxInput from "./fields/LightningCheckboxInput";
 import LightningInput from "./fields/LightningInput";
-import LightningRadioGroup from "./fields/LightningRadioGroup";
+import LightningBasicField from "./fields/LightningBasicField";
 import ShadowDomParser from "./ShadowDomParser";
 
 class FormChanger {
@@ -37,13 +37,7 @@ class FormChanger {
 
     getLightningRadioGroupField(label) {
         let element = this.parser.findLightningRadioGroupByLabel(label);
-        return new LightningRadioGroup(element);
-    }
-
-    changeElementValue(element, value) {
-        element.value = value;
-        let changeEvent = FormChanger.getChangeEvent();
-        return FormChanger.triggerEvent(element, changeEvent);
+        return new LightningBasicField(element);
     }
 
     changeLightningAddressInput(label, addressString) {
@@ -69,6 +63,16 @@ class FormChanger {
     getLightningCheckboxInputField(label) {
         let element = this.parser.findLightningInputByLabel(label);
         return new LightningCheckboxInput(element);
+    }
+
+    changeLightningCombobox(label, value) {
+        let field = this.getLightningComboboxField(label);
+        return field.changeTo(value);
+    }
+
+    getLightningComboboxField(label) {
+        let element = this.parser.findLightningCombobox(label);
+        return new LightningBasicField(element);
     }
 }
 
